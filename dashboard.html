@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cabangile TV PRO v3</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b0b0b;
+    color:white;
+}
+
+/* HEADER */
+header{
+    background:#b30000;
+    padding:15px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.live{
+    color:#00ff3b;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{50%{opacity:0;}}
+
+/* LAYOUT */
+.container{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.left{
+    flex:3;
+    padding:15px;
+}
+
+iframe{
+    width:100%;
+    height:420px;
+    border-radius:12px;
+    border:none;
+}
+
+/* BUTTONS */
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:10px;
+}
+
+button{
+    padding:10px 12px;
+    border:none;
+    border-radius:6px;
+    background:#ff0000;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#cc0000;
+}
+
+/* PLAYLIST PANEL */
+.right{
+    flex:1;
+    background:#151515;
+    padding:15px;
+    min-width:260px;
+}
+
+.playlist-btn{
+    padding:12px;
+    margin:10px 0;
+    background:#2a2a2a;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.playlist-btn:hover{
+    background:#3a3a3a;
+}
+
+.playlist-btn.active{
+    background:#ff0000;
+    font-weight:bold;
+}
+
+/* AD BOX */
+.ad-box{
+    margin-top:15px;
+    padding:20px;
+    background:#222;
+    text-align:center;
+    border:1px dashed #555;
+    border-radius:10px;
+    color:#aaa;
+}
+
+@media(max-width:800px){
+    .container{display:block;}
+    iframe{height:250px;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+CABANGILE TV <span class="live">● LIVE</span>
+</header>
+
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+
+<iframe id="player" allowfullscreen></iframe>
+
+<div class="controls">
+<button onclick="setPlaylist(0)">Playlist 1</button>
+<button onclick="setPlaylist(1)">Playlist 2</button>
+<button onclick="setPlaylist(2)">Playlist 3</button>
+<button onclick="setPlaylist(3)">Top 10</button>
+<button onclick="setPlaylist(4)">Top 50</button>
+</div>
+
+<div class="ad-box">
+Google Ad Slot (AdSense Ready Area)
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+<h2>🎬 TV Playlists</h2>
+
+<div class="playlist-btn" onclick="setPlaylist(0)">Playlist 1</div>
+<div class="playlist-btn" onclick="setPlaylist(1)">Playlist 2</div>
+<div class="playlist-btn" onclick="setPlaylist(2)">Playlist 3</div>
+<div class="playlist-btn" onclick="setPlaylist(3)">Top 10 Playlist</div>
+<div class="playlist-btn" onclick="setPlaylist(4)">Top 50 Playlist</div>
+
+</div>
+
+</div>
+
+<script>
+
+const playlists = [
+    "PLVD71e7wiLDo",
+    "PLcbPi_mSadoU",
+    "PLDMNgP2VOf_4",
+    "PLAWKsy_oB5nk",
+    "PLDI3wACn8V7w"
+];
+
+const player = document.getElementById("player");
+const buttons = document.querySelectorAll(".playlist-btn");
+
+function setPlaylist(index){
+
+    const id = playlists[index];
+
+    // YouTube playlist embed
+    player.src = "https://www.youtube.com/embed/videoseries?list=" + id + "&autoplay=1&rel=0";
+
+    buttons.forEach(b => b.classList.remove("active"));
+    buttons[index].classList.add("active");
+}
+
+/* START FIRST PLAYLIST */
+setPlaylist(0);
+
+</script>
+
+</body>
+</html>
